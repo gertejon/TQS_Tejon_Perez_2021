@@ -30,10 +30,12 @@ public class Date {
     }
 
     public boolean esTraspas(int year) {
-
+        if(year % 400 == 0 || year % 4 == 0)
+            return true;
+        return false;
     }
 
     public boolean setDate(int d, int m, int y) { //returns True --> valid date / returns False --> not valid date
-
+        return false;
     }
 }

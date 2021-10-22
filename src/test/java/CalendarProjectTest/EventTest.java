@@ -35,7 +35,7 @@ public class EventTest {
         event.setDesc("Desc1");
         assertEquals(event.getDesc(),"Desc1");
     }
-
+/*
     @Test
     public void getPriorityTest() {
         event = new Event();
@@ -64,5 +64,5 @@ public class EventTest {
         assertEquals(event.getPriority(),2);
     }
 
-
+*/
 }
