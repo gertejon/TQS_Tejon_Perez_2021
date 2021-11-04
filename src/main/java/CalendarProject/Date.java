@@ -53,6 +53,16 @@ public class Date {
     }
 
     public boolean setDate(int d, int m, int y) { //returns True --> valid date / returns False --> not valid date
+        if(m > 0 && m < 13) {
+            int daysLimit = daysMonth(m, y);
+            if(d > 0 && d <= daysLimit) {
+                setDd(d);
+                setMm(m);
+                setYy(y);
+                return true;
+            }
+        }
+
         return false;
     }
 }
