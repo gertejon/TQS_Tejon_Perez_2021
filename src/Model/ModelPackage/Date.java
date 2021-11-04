@@ -1,4 +1,4 @@
-package CalendarProject;
+package ModelPackage;
 
 public class Date {
     private int dd;

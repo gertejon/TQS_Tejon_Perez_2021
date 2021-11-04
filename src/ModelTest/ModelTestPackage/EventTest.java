@@ -1,7 +1,7 @@
-package CalendarProjectTest;
-import CalendarProject.Date;
+package ModelTestPackage;
+import ModelPackage.Date;
 import org.junit.jupiter.api.Test;
-import CalendarProject.Event;
+import ModelPackage.Event;
 
 import static org.junit.jupiter.api.Assertions.*;
 

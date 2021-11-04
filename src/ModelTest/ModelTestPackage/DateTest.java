@@ -1,9 +1,10 @@
-package CalendarProjectTest;
+package ModelTestPackage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import CalendarProject.Date;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import ModelPackage.Date;
 
 public class DateTest {
 
@@ -17,14 +18,13 @@ public class DateTest {
     @Test
     public void esTraspasTest() {
 
-
-        assertEquals(date.esTraspas(2020), true);
-        assertEquals(date.esTraspas(2018), false);
-        assertEquals(date.esTraspas(2019), false);
-        assertEquals(date.esTraspas(2021), false);
-        assertEquals(date.esTraspas(2095), false);
-        assertEquals(date.esTraspas(2080), true);
-        assertEquals(date.esTraspas(0), true);
+        assertTrue(date.esTraspas(2020));
+        assertFalse(date.esTraspas(2018));
+        assertFalse(date.esTraspas(2019));
+        assertFalse(date.esTraspas(2021));
+        assertFalse(date.esTraspas(2095));
+        assertTrue(date.esTraspas(2080));
+        assertTrue(date.esTraspas(0));
 
     }
 
@@ -63,41 +63,41 @@ public class DateTest {
     @Test
     public void setDateTest() {
         //mes erroni
-        assertEquals(date.setDate(0, 0, 0), false);
+        assertFalse(date.setDate(0, 0, 0));
         //gener traspas
-        assertEquals(date.setDate(0, 1, 2020), false);
-        assertEquals(date.setDate(1, 1, 2020), true);
-        assertEquals(date.setDate(2, 1, 2020), true);
-        assertEquals(date.setDate(30, 1, 2020), true);
-        assertEquals(date.setDate(31, 1, 2020), true);
+        assertFalse(date.setDate(0, 1, 2020));
+        assertTrue(date.setDate(1, 1, 2020), true);
+        assertTrue(date.setDate(2, 1, 2020), true);
+        assertTrue(date.setDate(30, 1, 2020), true);
+        assertTrue(date.setDate(31, 1, 2020), true);
         assertEquals(date.setDate(32, 1, 2020), false);
         //gener no-traspas
         assertEquals(date.setDate(0, 1, 2022), false);
-        assertEquals(date.setDate(1, 1, 2022), true);
-        assertEquals(date.setDate(2, 1, 2022), true);
-        assertEquals(date.setDate(30, 1, 2022), true);
-        assertEquals(date.setDate(31, 1, 2022), true);
+        assertTrue(date.setDate(1, 1, 2022), true);
+        assertTrue(date.setDate(2, 1, 2022), true);
+        assertTrue(date.setDate(30, 1, 2022), true);
+        assertTrue(date.setDate(31, 1, 2022), true);
         assertEquals(date.setDate(32, 1, 2022), false);
         //febrer traspas
         assertEquals(date.setDate(0, 2, 2020), false);
-        assertEquals(date.setDate(1, 2, 2020), true);
-        assertEquals(date.setDate(2, 2, 2020), true);
-        assertEquals(date.setDate(28, 2, 2020), true);
-        assertEquals(date.setDate(29, 2, 2020), true);
+        assertTrue(date.setDate(1, 2, 2020), true);
+        assertTrue(date.setDate(2, 2, 2020), true);
+        assertTrue(date.setDate(28, 2, 2020), true);
+        assertTrue(date.setDate(29, 2, 2020));
         assertEquals(date.setDate(30, 2, 2020), false);
         //febrer no-traspas
         assertEquals(date.setDate(0, 2, 2022), false);
-        assertEquals(date.setDate(1, 2, 2022), true);
-        assertEquals(date.setDate(2, 2, 2022), true);
-        assertEquals(date.setDate(27, 2, 2022), true);
-        assertEquals(date.setDate(28, 2, 2022), true);
+        assertTrue(date.setDate(1, 2, 2022));
+        assertTrue(date.setDate(2, 2, 2022));
+        assertTrue(date.setDate(27, 2, 2022));
+        assertTrue(date.setDate(28, 2, 2022));
         assertEquals(date.setDate(29, 2, 2022), false);
         //març traspas
-        assertEquals(date.setDate(0, 3, 2020), false);
-        assertEquals(date.setDate(1, 3, 2020), true);
-        assertEquals(date.setDate(2, 3, 2020), true);
-        assertEquals(date.setDate(30, 3, 2020), true);
-        assertEquals(date.setDate(31, 3, 2020), true);
+        assertEquals(date.setDate(0, 3, 2020));
+        assertTrue(date.setDate(1, 3, 2020));
+        assertTrue(date.setDate(2, 3, 2020));
+        assertTrue(date.setDate(30, 3, 2020));
+        assertTrue(date.setDate(31, 3, 2020));
         assertEquals(date.setDate(32, 3, 2020), false);
         //març no-traspas
         assertEquals(date.setDate(0, 3, 2022), false);
