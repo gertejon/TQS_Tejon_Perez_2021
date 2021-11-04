@@ -31,7 +31,7 @@ public class Date {
         this.mm = mm;
     }
 
-    public int getYy() {
+   public int getYy() {
         return yy;
     }
 
@@ -40,40 +40,76 @@ public class Date {
     }
 
     public boolean esTraspas(int year) {
+        boolean traspas = false;
         if(year % 400 == 0 || year % 4 == 0)
+            traspas = true;
+        return traspas;
+    }
+
+    public boolean month31(int month) {
+        boolean ok = false;
+        if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+            ok = true;
+        }
+        return ok;
+    }
+
+    public boolean february(int m) {
+        if (m == 2) {
             return true;
+        }
         return false;
+    }
+
+    public boolean validMonth(int m) {
+        boolean res = false;
+        if (m>0 && m<13) {
+            res = true;
+        }
+        return res;
+    }
+
+    public boolean validDay(int day, int limitDay) {
+        boolean res = false;
+        if(day > 0 && day <= limitDay) {
+            res = true;
+        }
+        return res;
     }
 
     public int daysMonth(int month, int year) {
-        int diesMes = 0;
-        boolean T = esTraspas(year);
-
-        if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-            return 31;
+        int daysMonth;
+        if(month31(month)) {
+            daysMonth = 31;
         }
         else {
-            if (month != 2)
-                return 30;
+            if (!february(month))
+                daysMonth =  30;
+            else {
+                if(esTraspas(year))
+                    daysMonth = 29;
+                else
+                    daysMonth = 28;
+            }
         }
-        if(T == true)
-            return 29;
-        else
-            return 28;
+        return daysMonth;
     }
 
     public boolean setDate(int d, int m, int y) { //returns True --> valid date / returns False --> not valid date
-        if(m > 0 && m < 13) {
+        boolean valid = false;
+        if(validMonth(m)) {
             int daysLimit = daysMonth(m, y);
-            if(d > 0 && d <= daysLimit) {
+            if(validDay(d, daysLimit)) {
                 setDd(d);
                 setMm(m);
                 setYy(y);
-                return true;
+                valid = true;
             }
         }
-
+        /* ------------- This must be implemented in VIEW --------------------
         System.out.println("Date is not valid");
-        return false;
+        */
+        return valid;
+
     }
 }
