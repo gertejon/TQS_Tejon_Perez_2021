@@ -6,7 +6,7 @@ public class Event {
     private String name;
     private String desc;
     private int priority;
-    private Date date;
+    private CalendarProject.Date date;
 
     public String getName() {
         return name;
@@ -32,11 +32,11 @@ public class Event {
         this.priority = priority;
     }
 
-    public Date getDate() {
+    public CalendarProject.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(CalendarProject.Date date) {
         this.date = date;
     }
 

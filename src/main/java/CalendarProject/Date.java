@@ -9,6 +9,16 @@ public class Date {
         return dd;
     }
 
+    public Date(int d, int m, int y) {
+        boolean valid = setDate(d, m, y);
+    }
+
+    public Date() {
+        dd = 0;
+        mm = 0;
+        yy = 0;
+    }
+
     public void setDd(int dd) {
         this.dd = dd;
     }
@@ -63,6 +73,7 @@ public class Date {
             }
         }
 
+        System.out.println("Date is not valid");
         return false;
     }
 }
