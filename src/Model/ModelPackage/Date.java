@@ -47,18 +47,19 @@ public class Date {
     }
 
     public boolean month31(int month) {
-        boolean ok = false;
+        boolean is31 = false;
         if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-            ok = true;
+            is31 = true;
         }
-        return ok;
+        return is31;
     }
 
     public boolean february(int m) {
+        boolean isFebruary = false;
         if (m == 2) {
-            return true;
+            isFebruary = true;
         }
-        return false;
+        return isFebruary;
     }
 
     public boolean validMonth(int m) {
