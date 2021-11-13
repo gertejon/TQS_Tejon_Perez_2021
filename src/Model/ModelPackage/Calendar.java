@@ -23,10 +23,20 @@ public class Calendar {
         return found;
     }
 
-    public boolean eventExists(Event E) {
+    public int getEventIndex(String name) {
+        int pos = -1; //will return this if not found
+        for (int i = 0; i < events.size(); i++) {
+            if(Objects.equals(events.get(i).getName(), name)) {
+                pos = i;
+            }
+        }
+        return pos;
+    }
+
+    public boolean eventExists(String name) {
         boolean found = false;
         for (Event event : events) {
-            if (Objects.equals(event.getName(), E.getName())) {
+            if (Objects.equals(event.getName(), name)) {
                 found = true;
             }
         }
@@ -35,7 +45,7 @@ public class Calendar {
 
     public boolean addEvent(Event E) { //sorted by event's priority
         boolean added = false;
-        if(!eventExists(E)) {
+        if(!eventExists(E.getName())) {
             int priority = E.getPriority();
             if(events.isEmpty()) {
                 events.add(0, E);
@@ -58,6 +68,12 @@ public class Calendar {
     }
 
     public boolean eraseEvent(String N) { //N is event's name
-        return false;
+        boolean erased = false;
+        if(!eventExists(N)) {
+            int index = getEventIndex(N);
+            events.remove(index);
+            erased = true;
+        }
+        return erased;
     }
 }
