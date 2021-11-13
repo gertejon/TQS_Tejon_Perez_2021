@@ -66,7 +66,33 @@ public class CalendarTest {
 
     @Test
     public void eraseEventTest() {
+        Event E4 = new Event("event1", "this is event1", 1, D1);
 
+        //adding events to erase
+        calendar.addEvent(E1);
+        calendar.addEvent(E2);
+        calendar.addEvent(E3);
+        calendar.addEvent(E4);
+
+        //trying to erase events
+        assertTrue(calendar.eraseEvent("event1"));
+        assertTrue(calendar.eraseEvent("event2"));
+        assertTrue(calendar.eraseEvent("event3"));
+        assertFalse(calendar.eraseEvent("event1"));
+
+        //trying to erase events that are already erased
+        assertFalse(calendar.eraseEvent("event1"));
+        assertFalse(calendar.eraseEvent("event2"));
+        assertFalse(calendar.eraseEvent("event3"));
+        assertFalse(calendar.eraseEvent("event1"));
+
+        //trying to erase events that never have been added
+        assertFalse(calendar.eraseEvent("event555"));
+        assertFalse(calendar.eraseEvent("Event1"));
+        assertFalse(calendar.eraseEvent("event"));
+
+        //checking calendar's event list is empty
+        assertEquals(calendar.getEvents().size(), 0);
     }
 
 }
