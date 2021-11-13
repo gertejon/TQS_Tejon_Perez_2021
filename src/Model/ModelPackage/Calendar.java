@@ -34,7 +34,27 @@ public class Calendar {
     }
 
     public boolean addEvent(Event E) { //sorted by event's priority
-        return false;
+        boolean added = false;
+        if(!eventExists(E)) {
+            int priority = E.getPriority();
+            if(events.isEmpty()) {
+                events.add(0, E);
+                added = true;
+            }
+            else {
+                for(int i = 0; i< events.size() && !added; i++) { //////////// this must be sorted ////////////
+                    if(priority < events.get(i).getPriority()) {
+                        events.add(i, E);
+                        added = true;
+                    }
+                    if(i == events.size()-1) {
+                        events.add(i + 1, E);
+                        added = true;
+                    }
+                }
+            }
+        }
+        return added;
     }
 
     public boolean eraseEvent(String N) { //N is event's name
