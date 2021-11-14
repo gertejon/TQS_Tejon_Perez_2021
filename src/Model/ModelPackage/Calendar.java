@@ -1,5 +1,8 @@
 package ModelPackage;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,9 +12,43 @@ import ModelPackage.Event;
 public class Calendar {
 
     private final List<Event> events = new ArrayList<Event>();
+    String fileName = "./src/model/DB.txt";
+    FileWriter DB;
 
+    public void updateDB() throws IOException {
+        //deleting old DB
+        try {
+            Files.delete(Paths.get(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //creating new FileWriter
+        DB = new FileWriter(fileName);
 
-    public List<Event> getEvents() {return events;}
+        //loop that writes events in the DB
+        for (Event event : events) {
+            //saving event's members in variables
+            String name = event.getName();
+            String desc = event.getDesc();
+            int priority = event.getPriority();
+            Date date = event.getDate();
+
+            String line = name + "|" + desc + "|" + priority + "|" + date.toString();
+
+            DB.write(line);
+            DB.write("\n");
+        }
+        DB.close();
+
+    }
+
+    public void getDBstate() throws IOException {
+        DB = new FileWriter(fileName);
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
 
     public Event getEvent(Event E) {
         Event found = null;
@@ -43,23 +80,26 @@ public class Calendar {
         return found;
     }
 
-    public boolean addEvent(Event E) { //sorted by event's priority
+    public boolean addEvent(Event E) throws IOException { //sorted by event's priority
         boolean added = false;
         if(!eventExists(E.getName())) {
             int priority = E.getPriority();
             if(events.isEmpty()) {
                 events.add(0, E);
                 added = true;
+                updateDB();
             }
             else {
-                for(int i = 0; i< events.size() && !added; i++) { //////////// this must be sorted ////////////
+                for(int i = 0; i< events.size() && !added; i++) {
                     if(priority < events.get(i).getPriority()) {
                         events.add(i, E);
                         added = true;
+                        updateDB();
                     }
                     if(i == events.size()-1) {
                         events.add(i + 1, E);
                         added = true;
+                        updateDB();
                     }
                 }
             }
@@ -67,12 +107,13 @@ public class Calendar {
         return added;
     }
 
-    public boolean eraseEvent(String N) { //N is event's name
+    public boolean eraseEvent(String N) throws IOException { //N is event's name
         boolean erased = false;
-        if(!eventExists(N)) {
+        if(eventExists(N)) {
             int index = getEventIndex(N);
             events.remove(index);
             erased = true;
+            updateDB();
         }
         return erased;
     }

@@ -1,10 +1,9 @@
 package ModelTestPackage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import ModelPackage.Date;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DateTest {
 
@@ -25,6 +24,17 @@ public class DateTest {
         assertFalse(date.esTraspas(2095));
         assertTrue(date.esTraspas(2080));
         assertTrue(date.esTraspas(0));
+
+        //condition coverage testing
+        assertEquals(date.year400(2000), date.esTraspas(2000));
+        assertEquals(date.year4(2000), date.esTraspas(2000));
+        assertEquals(date.year400(2019), date.esTraspas(2019));
+        assertNotEquals(date.year400(1800), date.esTraspas(1800));
+        assertEquals(date.year4(1800), date.esTraspas(1800));
+        assertNotEquals(date.year400(1900), date.esTraspas(1900));
+        assertEquals(date.year4(1900), date.esTraspas(1900));
+
+
 
     }
 

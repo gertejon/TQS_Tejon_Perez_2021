@@ -39,11 +39,33 @@ public class Date {
         this.yy = yy;
     }
 
+    public boolean year400(int year) {
+        boolean yes = false;
+        if(year%400 == 0) {
+            yes = true;
+        }
+        return yes;
+    }
+
+    public boolean year4(int year) {
+        boolean yes = false;
+        if(year%4 == 0) {
+            yes = true;
+        }
+        return yes;
+    }
+
     public boolean esTraspas(int year) {
         boolean traspas = false;
-        if(year % 400 == 0 || year % 4 == 0)
+        if(year400(year) || year4(year))
             traspas = true;
         return traspas;
+    }
+
+    public String toString() {
+        String date = dd + "/" + mm + "/" + yy;
+
+        return date;
     }
 
     public boolean month31(int month) {

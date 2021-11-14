@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import ModelPackage.Event;
 import ModelPackage.Calendar;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CalendarTest {
@@ -22,7 +24,7 @@ public class CalendarTest {
 
 
     @BeforeAll
-    public static void setUp() {
+    public static void setUp() throws IOException {
         calendar = new Calendar();
 
         D1 = new Date(1, 2, 2003);
@@ -35,7 +37,7 @@ public class CalendarTest {
     }
 
     @Test
-    public void addEventTest() {
+    public void addEventTest() throws IOException {
         //creating aux event, which is the same as event E1
         Event E4 = new Event("event1", "this is event1", 1, D1);
 
@@ -65,7 +67,7 @@ public class CalendarTest {
     }
 
     @Test
-    public void eraseEventTest() {
+    public void eraseEventTest() throws IOException {
         Event E4 = new Event("event1", "this is event1", 1, D1);
 
         //adding events to erase
