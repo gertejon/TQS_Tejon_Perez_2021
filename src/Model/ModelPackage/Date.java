@@ -105,10 +105,22 @@ public class Date {
 
     public boolean month31(int month) {
         boolean is31 = false;
-        if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        if(month_13(month) || month_57(month) || month_8_10_12(month)) {
             is31 = true;
         }
         return is31;
+    }
+
+    public boolean month_13(int month) {
+        return (month == 1 || month == 3);
+    }
+
+    public boolean month_57(int month) {
+        return (month == 5 || month == 7);
+    }
+
+    public boolean month_8_10_12(int month) {
+        return (month == 8 || month == 10 || month == 12);
     }
 
     public boolean february(int m) {

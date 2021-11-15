@@ -59,7 +59,37 @@ public class Calendar {
     }
 
     public Event processLine(String line) {
-        return new Event();
+        Event E = new Event();
+        StringBuilder str = new StringBuilder();
+        int field = 1; //1=name, 2=desc, 3=priority, 4=date
+
+        for(int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if(!separator(c)) {
+                str.append(c);
+            }
+            else {
+                switch(field) {
+                    case 1: //name
+                        E.setName(str.toString());
+                        str = new StringBuilder();
+                        field++;
+                        break;
+                    case 2: //desc
+                        E.setDesc(str.toString());
+                        str = new StringBuilder();
+                        field++;
+                        break;
+                    default: //priority
+                        int P = Integer.parseInt(str.toString());
+                        E.setPriority(P);
+                        str = new StringBuilder();
+
+                }
+            }
+        }
+        E.setDate(new Date(str.toString()));
+        return E;
     }
 
     public List<Event> getEvents() {
@@ -108,23 +138,33 @@ public class Calendar {
                     updateDB();
                 }
                 else {
-                    for(int i = 0; i< events.size() && !added; i++) {
-                        if(priority < events.get(i).getPriority()) {
-                            events.add(i, E);
-                            added = true;
-                            updateDB();
-                        }
-                        if(i == events.size()-1) {
-                            events.add(i + 1, E);
-                            added = true;
-                            updateDB();
-                        }
-                    }
+                    added = processAddEvent(E);
                 }
             }
         }
 
         return added;
+    }
+
+    public boolean processAddEvent(Event E) throws IOException {
+        boolean added = false;
+        for(int i = 0; i< events.size() && !added; i++) {
+            if(E.getPriority() < events.get(i).getPriority()) {
+                events.add(i, E);
+                added = true;
+                updateDB();
+            }
+            if(eventsEnd(i)) {
+                events.add(i + 1, E);
+                added = true;
+                updateDB();
+            }
+        }
+        return added;
+    }
+
+    public boolean eventsEnd(int index) {
+        return (index == events.size()-1);
     }
 
     public boolean eraseEvent(String N) throws IOException { //N is event's name

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ModelPackage.Event;
 import ModelPackage.Calendar;
+import ModelTestPackage.EventMock;
 
 import java.io.IOException;
 
@@ -18,9 +19,9 @@ public class CalendarTest {
     static Date D2;
     static Date D3;
 
-    static Event E1;
-    static Event E2;
-    static Event E3;
+    static EventMock E1;
+    static EventMock E2;
+    static EventMock E3;
 
 
     @BeforeAll
@@ -31,9 +32,23 @@ public class CalendarTest {
         D2 = new Date(3, 5, 2005);
         D3 = new Date(4, 8, 1995);
 
-        E1 = new Event("event1", "this is event1", 1, D1);
-        E2 = new Event("event2", "this is event2", 3, D2);
-        E3 = new Event("event3", "this is event3", 2, D3);
+        E1 = new EventMock("event1", "this is event1", 1, D1);
+        E1.setName("event1");
+        E1.setDesc("this is event1");
+        E1.setPriority(1);
+        E1.setDate(D1);
+
+        E2 = new EventMock("event2", "this is event2", 3, D2);
+        E2.setName("event2");
+        E2.setDesc("this is event2");
+        E2.setPriority(3);
+        E2.setDate(D2);
+
+        E3 = new EventMock("event3", "this is event3", 2, D3);
+        E3.setName("event3");
+        E3.setDesc("this is event3");
+        E3.setPriority(2);
+        E3.setDate(D3);
     }
 
     @Test
