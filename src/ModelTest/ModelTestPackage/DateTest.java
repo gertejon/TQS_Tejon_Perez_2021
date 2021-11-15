@@ -33,9 +33,6 @@ public class DateTest {
         assertEquals(date.year4(1800), date.esTraspas(1800));
         assertNotEquals(date.year400(1900), date.esTraspas(1900));
         assertEquals(date.year4(1900), date.esTraspas(1900));
-
-
-
     }
 
     @Test
@@ -274,7 +271,6 @@ public class DateTest {
         assertEquals(D.getDd(), 0);
         assertEquals(D.getMm(), 0);
         assertEquals(D.getYy(), 0);
-
     }
 
 }

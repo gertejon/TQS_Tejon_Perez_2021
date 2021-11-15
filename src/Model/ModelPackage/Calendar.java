@@ -59,7 +59,7 @@ public class Calendar {
     }
 
     public Event processLine(String line) {
-
+        return new Event();
     }
 
     public List<Event> getEvents() {

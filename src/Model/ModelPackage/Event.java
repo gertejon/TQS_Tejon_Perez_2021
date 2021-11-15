@@ -65,7 +65,8 @@ public class Event {
     }
 
     public boolean validEvent() {
-        return false;
+        boolean valid = true;
+        return valid;
     }
 
 

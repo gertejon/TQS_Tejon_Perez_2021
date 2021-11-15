@@ -23,7 +23,35 @@ public class Date {
     }
 
     public Date(String date) {
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        StringBuilder str = new StringBuilder();
+        int dmy = 0; //0 is day, 1 is month, 2 is year
 
+        for (int i = 0; i < date.length(); i++) {
+            char c = date.charAt(i);
+            if(!separator(c)) {
+                str.append(c);
+            }
+            else {
+                if(dmy == 0) { //day
+                    day = Integer.parseInt(String.valueOf(str));
+                    str = new StringBuilder();
+                    dmy = dmy + 1;
+                }
+                else {
+                    month = Integer.parseInt(String.valueOf(str));
+                    str = new StringBuilder();
+                    dmy = dmy + 1;
+                }
+            }
+        }
+        year = Integer.parseInt(String.valueOf(str));
+        str = new StringBuilder();
+        dmy = dmy + 1;
+
+        boolean validDate = setDate(day, month, year);
     }
 
     public void setDd(int dd) {

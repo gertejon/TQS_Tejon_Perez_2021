@@ -71,4 +71,19 @@ public class EventTest {
         assertNotEquals(event.getDate(), dt2);
     }
 
+    @Test
+    public void validEventTest() {
+        Event E1 = new Event("e1", "d1", 1, "24/5/2006");
+        Event E2 = new Event("", "d2", 2, "24/5/2006");
+        Event E3 = new Event("e3", "", 3, "24/5/2006");
+        Event E4 = new Event("e4", "d4", 0, "24/5/2006");
+        Event E5 = new Event("e5", "d5", 5, "0/0/0");
+
+        assertTrue(E1.validEvent());
+        assertFalse(E2.validEvent());
+        assertTrue(E3.validEvent());
+        assertFalse(E4.validEvent());
+        assertFalse(E5.validEvent());
+    }
+
 }
