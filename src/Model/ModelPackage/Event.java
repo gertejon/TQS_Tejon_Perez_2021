@@ -1,6 +1,8 @@
 package ModelPackage;
 
 
+import java.util.Objects;
+
 public class Event {
     private String name;
     private String desc;
@@ -12,6 +14,20 @@ public class Event {
         this.desc = desc;
         this.priority = priority;
         this.date = date;
+    }
+
+    public Event(String name, String desc, int priority, String date) {
+        this.name = name;
+        this.desc = desc;
+        this.priority = priority;
+        Date D = new Date(date);
+
+        if(D != null) {
+            this.date = D;
+        }
+
+        //converting from String to Date
+
     }
 
     public Event(){}
@@ -48,7 +64,9 @@ public class Event {
         this.date = date;
     }
 
-
+    public boolean validEvent() {
+        return false;
+    }
 
 
 

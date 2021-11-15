@@ -14,6 +14,7 @@ public class Calendar {
     private final List<Event> events = new ArrayList<Event>();
     String fileName = "./src/model/DB.txt";
     FileWriter DB;
+    File dataBase = new File(fileName);
 
     public void updateDB() throws IOException {
         //deleting old DB
@@ -43,7 +44,22 @@ public class Calendar {
     }
 
     public void getDBstate() throws IOException {
-        DB = new FileWriter(fileName);
+        FileReader fr = new FileReader(dataBase);
+        BufferedReader br = new BufferedReader(fr);
+        String line = "";
+
+        while((line = br.readLine()) != null) {
+            Event e = processLine(line);
+            addEvent(e);
+        }
+    }
+
+    public boolean separator(char c) {
+        return(c == '|');
+    }
+
+    public Event processLine(String line) {
+
     }
 
     public List<Event> getEvents() {
@@ -82,28 +98,32 @@ public class Calendar {
 
     public boolean addEvent(Event E) throws IOException { //sorted by event's priority
         boolean added = false;
-        if(!eventExists(E.getName())) {
-            int priority = E.getPriority();
-            if(events.isEmpty()) {
-                events.add(0, E);
-                added = true;
-                updateDB();
-            }
-            else {
-                for(int i = 0; i< events.size() && !added; i++) {
-                    if(priority < events.get(i).getPriority()) {
-                        events.add(i, E);
-                        added = true;
-                        updateDB();
-                    }
-                    if(i == events.size()-1) {
-                        events.add(i + 1, E);
-                        added = true;
-                        updateDB();
+
+        if(E.validEvent()) {
+            if(!eventExists(E.getName())) {
+                int priority = E.getPriority();
+                if(events.isEmpty()) {
+                    events.add(0, E);
+                    added = true;
+                    updateDB();
+                }
+                else {
+                    for(int i = 0; i< events.size() && !added; i++) {
+                        if(priority < events.get(i).getPriority()) {
+                            events.add(i, E);
+                            added = true;
+                            updateDB();
+                        }
+                        if(i == events.size()-1) {
+                            events.add(i + 1, E);
+                            added = true;
+                            updateDB();
+                        }
                     }
                 }
             }
         }
+
         return added;
     }
 

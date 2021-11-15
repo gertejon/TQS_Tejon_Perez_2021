@@ -246,4 +246,35 @@ public class DateTest {
         assertFalse(date.setDate(0, 13, 0));
     }
 
+    @Test
+    public void DateStringTest() {
+        Date D = new Date("20/4/2000");
+        date.setDate(20, 4, 2000);
+
+        assertEquals(date.getDd(), D.getDd());
+        assertEquals(date.getMm(), D.getMm());
+        assertEquals(date.getYy(), D.getYy());
+
+        D = new Date("29/2/2021");
+        assertNotEquals(D.getDd(), 29);
+        assertNotEquals(D.getMm(), 2);
+        assertNotEquals(D.getYy(), 2021);
+
+        D = new Date("29/2/2020");
+        assertEquals(D.getDd(), 29);
+        assertEquals(D.getMm(), 2);
+        assertEquals(D.getYy(), 2020);
+
+        D = new Date("5/0/2021");
+        assertNotEquals(D.getDd(), 5);
+        assertEquals(D.getMm(), 0);
+        assertNotEquals(D.getYy(), 2021);
+
+        D = new Date("5/0/2021");
+        assertEquals(D.getDd(), 0);
+        assertEquals(D.getMm(), 0);
+        assertEquals(D.getYy(), 0);
+
+    }
+
 }

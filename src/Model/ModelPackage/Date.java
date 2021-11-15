@@ -18,6 +18,13 @@ public class Date {
         mm = 0;
         yy = 0;
     }
+    public boolean separator(char c) {
+        return (c == '/');
+    }
+
+    public Date(String date) {
+
+    }
 
     public void setDd(int dd) {
         this.dd = dd;
