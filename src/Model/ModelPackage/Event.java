@@ -66,6 +66,11 @@ public class Event {
 
     public boolean validEvent() {
         boolean valid = true;
+
+        if((date.getDd() == 0) || Objects.equals(name, "") || priority < 1) {
+            valid = false;
+        }
+
         return valid;
     }
 

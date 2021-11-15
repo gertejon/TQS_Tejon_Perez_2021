@@ -97,4 +97,17 @@ public class CalendarTest {
         assertEquals(calendar.getEvents().size(), 0);
     }
 
+    @Test
+    public void processLineTest() {
+        String L1 = "event1|desc1|1|24/5/2007";
+        Event E1 = calendar.processLine(L1);
+        Event E1aux = new Event("event1", "desc1", 1, "24/5/2007");
+        assertEquals(E1.getName(), E1aux.getName());
+        assertEquals(E1.getDesc(), E1aux.getDesc());
+        assertEquals(E1.getPriority(), E1aux.getPriority());
+        assertEquals(E1.getDate().getDd(), E1aux.getDate().getDd());
+        assertEquals(E1.getDate().getMm(), E1aux.getDate().getMm());
+        assertEquals(E1.getDate().getYy(), E1aux.getDate().getYy());
+    }
+
 }
